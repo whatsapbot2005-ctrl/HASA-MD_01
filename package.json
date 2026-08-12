@@ -1,0 +1,13 @@
+{
+  "name": "hasa-md-01",
+  "version": "1.0.0",
+  "description": "HASA-MD WhatsApp Bot",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@whiskeysockets/baileys": "latest",
+    "pino": "latest"
+  }
+}
