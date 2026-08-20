@@ -5,12 +5,12 @@ import makeWASocket, {
 import P from "pino";
 
 async function startBot() {
-  const { state, saveCreds } = await useMultiFileAuthState("./auth_info");
+  const { state, saveCreds } =
+    await useMultiFileAuthState("./auth_info");
 
   const sock = makeWASocket({
     auth: state,
-    logger: P({ level: "silent" }),
-    printQRInTerminal: true
+    logger: P({ level: "silent" })
   });
 
   sock.ev.on("creds.update", saveCreds);
@@ -22,7 +22,8 @@ async function startBot() {
 
     if (connection === "close") {
       const shouldReconnect =
-        lastDisconnect?.error?.output?.statusCode !== DisconnectReason.loggedOut;
+        lastDisconnect?.error?.output?.statusCode !==
+        DisconnectReason.loggedOut;
 
       if (shouldReconnect) {
         startBot();
@@ -33,7 +34,7 @@ async function startBot() {
   sock.ev.on("messages.upsert", async ({ messages }) => {
     const msg = messages[0];
 
-    if (!msg.message || msg.key.fromMe) return;
+    if (!msg?.message || msg.key.fromMe) return;
 
     const text =
       msg.message.conversation ||
