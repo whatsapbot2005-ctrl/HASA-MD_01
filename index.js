@@ -1,8 +1,24 @@
+import http from "http";
+
 import makeWASocket, {
   useMultiFileAuthState,
   DisconnectReason
 } from "@whiskeysockets/baileys";
+
 import P from "pino";
+
+// Render PORT
+const PORT = process.env.PORT || 3000;
+
+// Web server එක මුලින්ම start කරන්න
+const server = http.createServer((req, res) => {
+  res.writeHead(200, { "Content-Type": "text/plain" });
+  res.end("HASA-MD Bot is running!");
+});
+
+server.listen(PORT, "0.0.0.0", () => {
+  console.log(`Server running on port ${PORT}`);
+});
 
 async function startBot() {
   const { state, saveCreds } =
